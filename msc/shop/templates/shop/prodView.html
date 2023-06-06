@@ -8,8 +8,9 @@
             <img src="/media/{{product.image}}" width="233px" height="385px">
         </div>
         <div class="row">
-            <button class="btn btn-primary col mx-3" >Buy Now</button>
-            <button class="btn btn-primary col" >Add to cart</button>
+           <a href="/checkout/"> <button class="btn btn-primary col mx-3" >Move To Checkout</button></a>
+            {% comment %} <button class="btn btn-primary col mx-3" >Buy Now</button>
+            <button class="btn btn-primary col" >Add to cart</button> {% endcomment %}
         </div>
     </div>
     <div class="col-md-8">
@@ -20,5 +21,21 @@
     </div>
     </div>
 </div>
+{% block js %}
+<script>
+    if (localStorage.getItem("cart") == null) {
+        var cart = {};
+      } else {
+        cart = JSON.parse(localStorage.getItem("cart"));
+      }
+      var sum=0;
+      for(item in cart){
+        let qty=cart[item][0];
+        sum=sum+qty;
+      }
+      document.getElementById("cart").innerHTML = sum;
+
+</script>
+{% endblock %}
 
 {% endblock %}
