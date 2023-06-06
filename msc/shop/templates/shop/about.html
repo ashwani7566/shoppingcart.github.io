@@ -60,6 +60,22 @@
     </div> <!-- /container -->
   
   </main>
+  {% block js %}
+  <script>
+      if (localStorage.getItem("cart") == null) {
+          var cart = {};
+        } else {
+          cart = JSON.parse(localStorage.getItem("cart"));
+        }
+        var sum=0;
+        for(item in cart){
+          let qty=cart[item][0];
+          sum=sum+qty;
+        }
+        document.getElementById("cart").innerHTML = sum;
+  
+  </script>
+  {% endblock %}
   
 
 {% endblock %}
